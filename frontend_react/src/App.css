@@ -266,6 +266,171 @@
 }
 
 /* -----------------------------
+   Daily Update form
+------------------------------ */
+
+.bpp-form {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--bpp-surface-2);
+}
+
+.bpp-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.bpp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.bpp-field--full {
+  grid-column: 1 / -1;
+}
+
+.bpp-label {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.bpp-input,
+.bpp-textarea {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: var(--bpp-surface);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.bpp-textarea {
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.bpp-input:focus,
+.bpp-textarea:focus {
+  border-color: color-mix(in srgb, var(--bpp-primary) 65%, var(--border-color));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bpp-primary) 18%, transparent);
+}
+
+.bpp-form__actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.bpp-button {
+  border: 1px solid transparent;
+  background: var(--bpp-primary);
+  color: #111827;
+  font-weight: 900;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.bpp-button:hover {
+  filter: brightness(0.97);
+}
+
+.bpp-submitted {
+  margin-top: 14px;
+}
+
+.bpp-submitted__title {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.bpp-submitted__empty {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-primary) 72%, transparent);
+}
+
+.bpp-submitted__card {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--bpp-surface-2);
+}
+
+.bpp-submitted__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.bpp-submitted__timestamp {
+  font-size: 12px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
+}
+
+.bpp-submitted__note {
+  margin: 0 0 10px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--bpp-primary) 55%, var(--border-color));
+  background: color-mix(in srgb, var(--bpp-primary) 10%, transparent);
+  font-weight: 800;
+}
+
+.bpp-submitted__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.bpp-submitted__block {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bpp-surface) 85%, transparent);
+  padding: 10px 12px;
+}
+
+.bpp-submitted__label {
+  font-size: 12px;
+  font-weight: 900;
+  color: color-mix(in srgb, var(--text-primary) 72%, transparent);
+  margin-bottom: 6px;
+}
+
+.bpp-pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.bpp-muted {
+  color: color-mix(in srgb, var(--text-primary) 65%, transparent);
+  font-weight: 700;
+}
+
+/* Mobile layout adjustments for the form */
+@media (max-width: 900px) {
+  .bpp-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------
    Responsive behavior
 ------------------------------ */
 

@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import DashboardContent from "./components/DashboardContent";
+import DailyUpdate from "./components/DailyUpdate";
 
 // PUBLIC_INTERFACE
 function App() {
@@ -19,7 +20,9 @@ function App() {
   const handleToggleSidebar = () => setIsSidebarOpen((v) => !v);
 
   const content = useMemo(() => {
-    // For now, always render the same placeholders; show selected section name.
+    if (activeSection === "Daily Update") return <DailyUpdate />;
+
+    // Default to dashboard placeholders for other sections until implemented.
     return <DashboardContent activeSection={activeSection} />;
   }, [activeSection]);
 
