@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/participant-progress-tracker-40914-40923/frontend_react"
+}
