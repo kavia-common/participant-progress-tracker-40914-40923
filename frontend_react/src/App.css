@@ -388,6 +388,12 @@
   font-weight: 800;
 }
 
+.bpp-submitted__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
 .bpp-submitted__content {
   display: grid;
   grid-template-columns: 1fr;
