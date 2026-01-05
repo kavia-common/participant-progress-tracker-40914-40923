@@ -1,47 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo, useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import DashboardContent from "./components/DashboardContent";
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  /** App entry rendering a responsive dashboard shell with static placeholders. */
+  const [activeSection, setActiveSection] = useState("Dashboard");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  const handleSelect = (label) => {
+    setActiveSection(label);
+    // On small screens, close after selecting for better UX.
+    setIsSidebarOpen(false);
   };
 
+  const handleToggleSidebar = () => setIsSidebarOpen((v) => !v);
+
+  const content = useMemo(() => {
+    // For now, always render the same placeholders; show selected section name.
+    return <DashboardContent activeSection={activeSection} />;
+  }, [activeSection]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bpp-app">
+      <Header onToggleSidebar={handleToggleSidebar} />
+
+      <div className="bpp-layout">
+        <Sidebar
+          activeItem={activeSection}
+          onSelectItem={handleSelect}
+          isOpen={isSidebarOpen}
+        />
+        {content}
+      </div>
     </div>
   );
 }

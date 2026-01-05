@@ -8,6 +8,13 @@
   --border-color: #e9ecef;
   --button-bg: #007bff;
   --button-text: #ffffff;
+
+  /* Portal accent colors (simple and beginner-friendly) */
+  --bpp-primary: #f97316; /* orange */
+  --bpp-secondary: #10b981; /* emerald */
+  --bpp-surface: #ffffff;
+  --bpp-surface-2: #f6f7fb;
+  --bpp-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] {
@@ -19,86 +26,276 @@
   --border-color: #404040;
   --button-bg: #0056b3;
   --button-text: #ffffff;
+
+  --bpp-surface: #1f2937;
+  --bpp-surface-2: #111827;
+  --bpp-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
 .App {
-  text-align: center;
+  text-align: left;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* -----------------------------
+   Bootcamp Progress Portal Layout
+------------------------------ */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
+.bpp-app {
   min-height: 100vh;
+}
+
+.bpp-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--bpp-primary) 25%, transparent) 0%,
+    transparent 60%
+  );
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(6px);
+}
+
+.bpp-header__menuButton {
+  display: none; /* shown on small screens */
+  border: 1px solid var(--border-color);
+  background: var(--bpp-surface);
+  color: var(--text-primary);
+  border-radius: 10px;
+  height: 40px;
+  width: 44px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.bpp-header__menuButton:hover {
+  border-color: color-mix(in srgb, var(--bpp-primary) 40%, var(--border-color));
+}
+
+.bpp-header__titleWrap {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.bpp-header__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bpp-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  padding: 16px;
+  align-items: start;
+}
+
+.bpp-sidebar {
+  position: sticky;
+  top: 72px;
+  align-self: start;
+  background: var(--bpp-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: var(--bpp-shadow);
+  padding: 14px;
+}
+
+.bpp-sidebar__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
+  margin-bottom: 10px;
+}
+
+.bpp-sidebar__nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 8px;
+}
+
+.bpp-sidebar__navItem {
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
-}
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.bpp-sidebar__navItem:hover {
+  background: color-mix(in srgb, var(--bpp-primary) 10%, transparent);
+  border-color: color-mix(in srgb, var(--bpp-primary) 30%, transparent);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.bpp-sidebar__navItem.is-active {
+  background: color-mix(in srgb, var(--bpp-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--bpp-primary) 50%, transparent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.bpp-sidebar__footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.bpp-sidebar__hint {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
+  line-height: 1.4;
+}
+
+.bpp-main {
+  background: var(--bpp-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: var(--bpp-shadow);
+  padding: 18px;
+  min-height: 420px;
+}
+
+.bpp-main__top {
+  margin-bottom: 14px;
+}
+
+.bpp-main__breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bpp-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bpp-secondary) 14%, transparent);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bpp-main__sectionName {
+  font-weight: 900;
+}
+
+.bpp-main__subtitle {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-primary) 72%, transparent);
+}
+
+.bpp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.bpp-card {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--bpp-surface-2);
+}
+
+.bpp-card__title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.bpp-card__text {
+  margin: 0 0 10px 0;
+  color: color-mix(in srgb, var(--text-primary) 75%, transparent);
+}
+
+.bpp-card__list {
+  margin: 0;
+  padding-left: 18px;
+  color: color-mix(in srgb, var(--text-primary) 85%, transparent);
+}
+
+.bpp-statusGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.bpp-statusItem {
+  border: 1px dashed color-mix(in srgb, var(--border-color) 90%, transparent);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--bpp-surface) 80%, transparent);
+}
+
+.bpp-statusItem__label {
+  font-size: 12px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--text-primary) 70%, transparent);
+  margin-bottom: 4px;
+}
+
+.bpp-statusItem__value {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* -----------------------------
+   Responsive behavior
+------------------------------ */
+
+/* Tablet / small screens: stack sidebar above content */
+@media (max-width: 900px) {
+  .bpp-cards {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+/* Mobile: show menu button and collapse sidebar by default (toggle via state) */
+@media (max-width: 720px) {
+  .bpp-layout {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .bpp-header__menuButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .bpp-sidebar {
+    position: static;
+    display: none;
+  }
+
+  .bpp-sidebar.is-open {
+    display: block;
   }
 }
